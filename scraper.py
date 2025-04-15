@@ -84,9 +84,11 @@ class Scraper:
                     f.write(chunk)
 
         except requests.exceptions.RequestException as e:
-            raise Exception(f"Error downloading file from {url}: {str(e)}")
+            print(f"Error downloading file from {url}: {str(e)}")
+            return None
         except IOError as e:
-            raise Exception(f"Error saving file to {file_path}: {str(e)}")
+            print(f"Error saving file to {file_path}: {str(e)}")
+            return None
     
     async def create_and_upload_zip(self):
             zip_path = f"{self.__TEMPORARY_FOLDER}/site.zip"
@@ -153,6 +155,6 @@ class Scraper:
             except Exception as e:
                 print(f"Errore durante il download del file. Indice {idx}: {str(e)}")
                 pass
-        #await self.create_and_upload_zip()
+        await self.create_and_upload_zip()
 
         return True
