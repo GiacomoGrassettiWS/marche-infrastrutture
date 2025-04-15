@@ -34,14 +34,14 @@ class Scraper:
     async def get_json_data(self):
         """Recupera i dati JSON dall'endpoint configurato"""
         try:
-            with open(self.__FILE_ENDPOINT, 'r') as file:
-                data = json.load(file)
-                return json.dumps(data)
-            #response = requests.get(self.__FILE_ENDPOINT, headers=self.session.headers)
-            #if response.status_code == 200:
-            #    return response.content 
-            #else:
-            #    raise Exception(f"Errore nella richiesta: {response.status_code} - {response.text}")
+            #with open(self.__FILE_ENDPOINT, 'r') as file:
+            #    data = json.load(file)
+            #    return json.dumps(data)
+            response = requests.get(self.__FILE_ENDPOINT, headers=self.session.headers)
+            if response.status_code == 200:
+                return response.content 
+            else:
+                raise Exception(f"Errore nella richiesta: {response.status_code} - {response.text}")
         except Exception as e:
             raise Exception(f"Errore nella lettura del file JSON: {str(e)}")
     
@@ -153,6 +153,6 @@ class Scraper:
             except Exception as e:
                 print(f"Errore durante il download del file. Indice {idx}: {str(e)}")
                 pass
-        await self.create_and_upload_zip()
+        #await self.create_and_upload_zip()
 
         return True
