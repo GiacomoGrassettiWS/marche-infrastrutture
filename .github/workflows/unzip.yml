@@ -3,7 +3,7 @@ name: Unzip uploaded files
 on:
   push:
     paths:
-      - 'downloads/files.zip'
+      - 'downloads/site.zip'
 
 jobs:
   unzip:
@@ -21,7 +21,7 @@ jobs:
         run: |
           echo "Contenuto della cartella downloads/:"
           ls -la downloads/
-          if [ -f "downloads/files.zip" ]; then
+          if [ -f "downloads/site.zip" ]; then
             echo "File ZIP trovato!"
           else
             echo "ERRORE: File ZIP non trovato"
@@ -32,7 +32,7 @@ jobs:
         run: |
           rm -rf downloads/unzipped/* || true
           mkdir -p downloads/unzipped
-          unzip -o downloads/files.zip -d downloads/unzipped/
+          unzip -o downloads/site.zip -d downloads/unzipped/
           echo "File estratti:"
           ls -la downloads/unzipped/
 

@@ -89,13 +89,13 @@ class Scraper:
             raise Exception(f"Error saving file to {file_path}: {str(e)}")
     
     async def create_and_upload_zip(self):
-            zip_path = f"{self.__TEMPORARY_FOLDER}/files.zip"
+            zip_path = f"{self.__TEMPORARY_FOLDER}/site.zip"
             with zipfile.ZipFile(zip_path, "w") as zipf:
                 # List all files in the temporary folder
                 for root, _, files in os.walk(self.__TEMPORARY_FOLDER):
                     for file in files:
                         # Skip the zip file itself to avoid recursion
-                        if file == "files.zip":
+                        if file == "site.zip":
                             continue
                         
                         file_path = os.path.join(root, file)
@@ -136,7 +136,7 @@ class Scraper:
     async def get_file_sha(self, repo):
         # Controlla se il file esiste già
         try:
-            file = repo.get_contents("downloads/files.zip")
+            file = repo.get_contents("downloads/site.zip")
             sha = file.sha  # Hash Git del file esistente
         except:
             sha = None  # Il file non esiste
