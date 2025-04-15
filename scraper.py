@@ -106,8 +106,15 @@ class Scraper:
             # Carica l'ZIP (usando PyGithub o Git)
             github = Github(self.__GITHUB_TOKEN)
             repo = github.get_repo(self.__GITHUB_REPO)
+            file_sha = await self.get_file_sha(repo)
             with open(zip_path, "rb") as f:
-                repo.create_file("downloads/files.zip", "Add batch", f.read(), "main")
+                repo.update_file(
+                    path=file_path,
+                    message="Aggionramento KB",
+                    content=f.read(),
+                    sha=file_sha,
+                    branch="main"
+                )
             # Clean up temporary files after successful upload
             print("Cleaning up temporary files...")
             for root, dirs, files in os.walk(self.__TEMPORARY_FOLDER):
@@ -117,7 +124,16 @@ class Scraper:
                         os.remove(file_path)
                     except Exception as e:
                         print(f"Error deleting {file}: {str(e)}")
-        
+    
+    async def get_file_sha(self, repo):
+        # Controlla se il file esiste già
+        try:
+            file = repo.get_contents("downloads/files.zip")
+            sha = file.sha  # Hash Git del file esistente
+        except:
+            sha = None  # Il file non esiste
+        return sha
+            
     async def entry_point(self) -> bool:
         """Metodo principale per l'esecuzione dello script"""
         data = json.loads(await self.get_json_data())

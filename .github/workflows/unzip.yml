@@ -16,7 +16,7 @@ jobs:
         run: |
           mkdir -p downloads/unzipped
           unzip downloads/files.zip -d downloads/unzipped/
-          rm downloads/files.zip  # Opzionale: rimuove lo ZIP dopo l'estrazione
+          rm downloads/files.zip
 
       - name: Commit extracted files
         run: |

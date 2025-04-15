@@ -1,4 +1,4 @@
-from fastapi import FastAPI, UploadFile
+from fastapi import FastAPI
 import uvicorn
 from dotenv import load_dotenv
 from scraper import Scraper
