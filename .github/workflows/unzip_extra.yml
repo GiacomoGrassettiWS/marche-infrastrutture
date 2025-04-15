@@ -1,0 +1,45 @@
+name: Unzip uploaded extra files
+
+on:
+  push:
+    paths:
+      - 'downloads/extra.zip'
+
+jobs:
+  unzip:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Verify ZIP exists
+        run: |
+          echo "Contenuto della cartella downloads/:"
+          ls -la downloads/
+          if [ -f "downloads/extra.zip" ]; then
+            echo "File ZIP trovato!"
+          else
+            echo "ERRORE: File ZIP non trovato"
+            exit 1
+          fi
+
+      - name: Unzip files
+        run: |
+          rm -rf downloads/unzipped_extra/* || true
+          mkdir -p downloads/unzipped_extra
+          unzip -o downloads/site.zip -d downloads/unzipped_extra/
+          echo "File estratti:"
+          ls -la downloads/unzipped_extra/
+
+      - name: Commit changes
+        run: |
+          git config --global user.name "GitHub Actions"
+          git config --global user.email "actions@github.com"
+          git add downloads/unzipped_extra/
+          git commit -m "Extracted extra files from ZIP [skip ci]" || echo "Nessun cambiamento da commitare"
+          git push

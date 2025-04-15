@@ -1,4 +1,4 @@
-name: Unzip uploaded files
+name: Unzip uploaded site files
 
 on:
   push:
@@ -30,16 +30,16 @@ jobs:
 
       - name: Unzip files
         run: |
-          rm -rf downloads/unzipped/* || true
-          mkdir -p downloads/unzipped
-          unzip -o downloads/site.zip -d downloads/unzipped/
+          rm -rf downloads/unzipped_site/* || true
+          mkdir -p downloads/unzipped_site
+          unzip -o downloads/site.zip -d downloads/unzipped_site/
           echo "File estratti:"
-          ls -la downloads/unzipped/
+          ls -la downloads/unzipped_site/
 
       - name: Commit changes
         run: |
           git config --global user.name "GitHub Actions"
           git config --global user.email "actions@github.com"
-          git add downloads/unzipped/
-          git commit -m "Extracted files from ZIP [skip ci]" || echo "Nessun cambiamento da commitare"
+          git add downloads/unzipped_site/
+          git commit -m "Extracted site files from ZIP [skip ci]" || echo "Nessun cambiamento da commitare"
           git push
