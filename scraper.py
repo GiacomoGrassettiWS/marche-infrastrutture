@@ -110,14 +110,14 @@ class Scraper:
             with open(zip_path, "rb") as f:
                 if not file_sha:
                     repo.create_file(
-                        path="downloads/files.zip",
+                        path="downloads/site.zip",
                         message="Aggionramento KB",
                         content=f.read(),
                         branch="main"
                     )
                 else:
                     repo.update_file(
-                        path="downloads/files.zip",
+                        path="downloads/site.zip",
                         message="Aggionramento KB",
                         content=f.read(),
                         sha=file_sha,
