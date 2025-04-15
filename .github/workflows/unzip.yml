@@ -30,6 +30,7 @@ jobs:
 
       - name: Unzip files
         run: |
+          rm -rf downloads/unzipped/* || true
           mkdir -p downloads/unzipped
           unzip -o downloads/files.zip -d downloads/unzipped/
           echo "File estratti:"

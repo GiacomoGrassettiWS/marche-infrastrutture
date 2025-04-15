@@ -108,13 +108,21 @@ class Scraper:
             repo = github.get_repo(self.__GITHUB_REPO)
             file_sha = await self.get_file_sha(repo)
             with open(zip_path, "rb") as f:
-                repo.update_file(
-                    path=file_path,
-                    message="Aggionramento KB",
-                    content=f.read(),
-                    sha=file_sha,
-                    branch="main"
-                )
+                if not file_sha:
+                    repo.create_file(
+                        path="downloads/files.zip",
+                        message="Aggionramento KB",
+                        content=f.read(),
+                        branch="main"
+                    )
+                else:
+                    repo.update_file(
+                        path="downloads/files.zip",
+                        message="Aggionramento KB",
+                        content=f.read(),
+                        sha=file_sha,
+                        branch="main"
+                    )
             # Clean up temporary files after successful upload
             print("Cleaning up temporary files...")
             for root, dirs, files in os.walk(self.__TEMPORARY_FOLDER):
