@@ -1,0 +1,48 @@
+{
+	"range": "Foglio1!A1:V981",
+	"majorDimension": "ROWS",
+	"values": [
+		[
+			"/portals/0/Infrastrutture/2_Strade/Strade_E78Fano-Grosseto/Strade_E78Fano-Grosseto_2024_02_13_Corriere Adriatico.pdf",
+			"13/02/2024",
+			"Corriere Adriatico",
+			"Strade",
+			"E78 Fano Grosseto",
+			"Articolo"
+		],
+		[
+			"/portals/0/Infrastrutture/4_Logistica/Logistica_PortoAncona/Logistica_PortoAncona_2024_02_09_RestodelCarlino.pdf",
+			"09/02/2024",
+			"Resto del Carlino",
+			"Logistica",
+			"Porto Ancona",
+			"Articolo",
+			"Banchina 26"
+		],
+		[
+			"https://youtu.be/MXc25RPWx0s",
+			"15/11/2023",
+			"Canale Youtube Regione Marche",
+			"Ferrovie",
+			"Treno Storico",
+			"Video"
+		],
+		[
+			"https://youtu.be/YUQDXbusjl0",
+			"29/09/2023",
+			"Fano TV",
+			"Ospedali",
+			"H Pesaro",
+			"Video"
+		],
+		[
+			"/portals/0/Infrastrutture/7_Ciclovie/Ciclovie_CicloviaAdriatica/Ciclovie_CicloviaAdriatica_PonteTronto/Ciclovie_CicloviaAdriatica_PonteTronto_2024_02_04_CorriereAdriatico.pdf",
+			"04/02/2024",
+			"Corriere Adriatico",
+			"Ciclovie",
+			"Ciclovia Adriatica",
+			"Articolo",
+			"Ponte Tronto"
+		]
+    ]
+}

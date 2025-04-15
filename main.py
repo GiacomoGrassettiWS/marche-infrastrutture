@@ -1,28 +1,24 @@
-from fastapi import FastAPI
+from fastapi import FastAPI, UploadFile
 import uvicorn
 from dotenv import load_dotenv
-import requests
-import os
- 
+from scraper import Scraper
 app = FastAPI()
+
 load_dotenv()
 
 @app.get("/")
 async def root():
     return {"status": "OK"}
 
-@app.get("/interventi")
-async def get_interventi():
-    url = os.getenv("WMSCARTOGRAFIA_URL")
-    if url:
-        response =  requests.get(url)
-        if response.status_code == 200:
-            return response.json()["features"]
-        else:
-            return {"message": "Errore nella richiesta"}
-    else:
-        return {"message": "URL non configurato"}
-    
-    # Start the FastAPI server
+@app.get("/upload_media_pubb")
+async def upload_media_pubb():
+    try:
+        scraper = Scraper()
+        completed = await scraper.entry_point()
+        return {"completed": completed, "message": "Upload completato"}
+    except Exception as e:
+        return {"completed": False, "message": str(e)}
+
+# Start the FastAPI server
 if __name__ == "__main__":
     uvicorn.run(app, host="0.0.0.0", port=8000)
