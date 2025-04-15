@@ -3,4 +3,3 @@ venv
 .env
 .temp_files
 test
-downloads
