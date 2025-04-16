@@ -12,7 +12,7 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v3
 
-      - name: Download tutti i file (tranne YouTube)
+      - name: Download files (all except YouTube)
         run: |
           mkdir -p articoli
           cd articoli
@@ -21,23 +21,27 @@ jobs:
 
           sudo apt-get update && sudo apt-get install -y jq
 
-          jq -r '.values[] | .[0]' data.json | while read url; do
-            if [[ "$url" == *youtu* ]]; then
+          jq -r '.values[] | .[0]' data.json | while read -r url; do
+            if [[ "$url" =~ [yY][oO][uU][tT][uU] ]]; then
               echo "⏭️ Skipping YouTube: $url"
               continue
             fi
 
-            if [[ "$url" == /portals* ]]; then
-              url="https://www.regione.marche.it$url"
+            if [[ "$url" =~ ^/[pP][oO][rR][tT][aA][lL][sS] ]]; then
+              url="https://www.regione.marche.it${url}"
             fi
 
+            encoded_url=$(echo "$url" | sed -e 's/ /%20/g' -e 's/\[/%5B/g' -e 's/\]/%5D/g')
+            filename=$(basename "$url" | sed -e 's/ /_/g' -e 's/[^a-zA-Z0-9._-]/_/g')
+
             echo "⬇️ Downloading: $url"
-            curl -s -O "$url" || echo "❌ Failed: $url"
+            
+            curl -s -L -o "$filename" "$encoded_url" || echo "❌ Failed: $url"
           done
 
           rm data.json
 
-      - name: Commit e push
+      - name: Commit and push
         run: |
           git config --global user.name "GitHub Actions"
           git config --global user.email "actions@github.com"
