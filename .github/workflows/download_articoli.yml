@@ -14,7 +14,6 @@ jobs:
 
       - name: Download files (all except YouTube)
         run: |
-          rm -rf articoli || true
           mkdir -p articoli
           cd articoli
 
