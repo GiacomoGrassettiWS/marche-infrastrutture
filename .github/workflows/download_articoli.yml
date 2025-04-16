@@ -14,6 +14,7 @@ jobs:
 
       - name: Download files (all except YouTube)
         run: |
+          rm -rf articoli || true
           mkdir -p articoli
           cd articoli
 
@@ -34,7 +35,7 @@ jobs:
             encoded_url=$(echo "$url" | sed -e 's/ /%20/g' -e 's/\[/%5B/g' -e 's/\]/%5D/g')
             filename=$(basename "$url" | sed -e 's/ /_/g' -e 's/[^a-zA-Z0-9._-]/_/g')
 
-            echo "⬇️ Downloading: $url"
+            echo "⬇️ Downloading: $encoded_url"
             
             curl -s -L -o "$filename" "$encoded_url" || echo "❌ Failed: $url"
           done
