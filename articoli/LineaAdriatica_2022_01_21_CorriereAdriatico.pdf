@@ -1,0 +1,7 @@
+<html>
+<head><title>302 Found</title><script>var __uzdbm_1 = "7e005f87-952a-40db-96d7-18307736fba6";var __uzdbm_2 = "NTIxMDY3NDMtZDNvdS00ODkzLTkzN2EtNzgyZmIzMDk1YWM1JDIwLjQyLjQ5Ljkx";var __uzdbm_3 = "7f600028c0e7ce-9683-414a-a460-07ce7b275c3017447957984450-25d5ad80e3bc03f610";var __uzdbm_4 = "false";var __uzdbm_5 = "uzmx";var __uzdbm_6 = "7f9000f132793c-95b8-40b3-bc0a-4b6c2e7f7e641-17447957984450-38cde617dd7f4e4110";var __uzdbm_7 = "regione.marche.it";</script> <script>   (function (w, d, e, u, c, g, a, b) {     w["SSJSConnectorObj"] = w["SSJSConnectorObj"] || {       ss_cid: c,       domain_info: "auto",     };     w[g] = function (i, j) {       w["SSJSConnectorObj"][i] = j;     };     a = d.createElement(e);     a.async = true;     if (       navigator.userAgent.indexOf('MSIE') !== -1 ||       navigator.appVersion.indexOf('Trident/') > -1     ) {       u = u.replace("/advanced/", "/advanced/ie/");     }     a.src = u;     b = d.getElementsByTagName(e)[0];     b.parentNode.insertBefore(a, b);   })(     window, document, "script", "https://www.regione.marche.it/18f5227b-e27b-445a-a53f-f845fbe69b40/stormcaster.js", "d3ow", "ssConf"   );   ssConf("c1", "https://www.regione.marche.it");   ssConf("c3", "c99a4269-161c-4242-a3f0-28d44fa6ce24");   ssConf("au", "regione.marche.it");   ssConf("cu", "validate.perfdrive.com, ssc"); </script></head>
+<body>
+<center><h1>302 Found</h1></center>
+<hr><center>rdwr</center>
+</body>
+</html>
