@@ -1,7 +1,0 @@
-fastapi[standard]
-uvicorn
-requests
-python-dotenv
-PyGithub
-urllib3 # HTTP client
-
