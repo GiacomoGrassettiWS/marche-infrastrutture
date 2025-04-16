@@ -1,0 +1,46 @@
+name: Download Articoli
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: '0 0 * * *'  # Esegui ogni giorno a mezzanotte
+
+jobs:
+  download-files:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Download tutti i file (tranne YouTube)
+        run: |
+          mkdir -p articoli
+          cd articoli
+
+          curl -s "https://www.regione.marche.it/jsons/rassegna_stampa_infrastrutture.csv?_=1744119555647" -o data.json
+
+          sudo apt-get update && sudo apt-get install -y jq
+
+          jq -r '.values[] | .[0]' data.json | while read url; do
+            if [[ "$url" == *youtu* ]]; then
+              echo "⏭️ Skipping YouTube: $url"
+              continue
+            fi
+
+            if [[ "$url" == /portals* ]]; then
+              url="https://www.regione.marche.it$url"
+            fi
+
+            echo "⬇️ Downloading: $url"
+            curl -s -O "$url" || echo "❌ Failed: $url"
+          done
+
+          rm data.json
+
+      - name: Commit e push
+        run: |
+          git config --global user.name "GitHub Actions"
+          git config --global user.email "actions@github.com"
+          git add articoli/
+          git diff --quiet && git diff --staged --quiet || git commit -m "🔄 Auto-update articoli $(date +'%d/%m/%Y')"
+          git push
